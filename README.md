@@ -1,6 +1,11 @@
 # travel
 
+
+Flutter 101 through building:
+![dribble design](image.png)
 A new Flutter project.
+
+Inspo: [Dribble Design](https://dribbble.com/shots/25980092-Travel-App)
 
 ## Getting Started
 
