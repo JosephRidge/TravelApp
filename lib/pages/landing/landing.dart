@@ -1,6 +1,8 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:slider_button/slider_button.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -93,6 +95,46 @@ class _LandingPageState extends State<LandingPage> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+
+                  Center(
+                    child: SliderButton(
+                      shimmer: false,
+                      height: 60,
+                      backgroundColor: const Color(0xff4c593b),
+                      buttonColor: const Color(0xff9bfe67),
+                      action: () async {
+                        ///Do something here OnSlide
+                        return true;
+                      },
+                      label: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SizedBox(width: 40),
+                          Text(
+                            "Explore Now",
+                            style: TextStyle(
+                              color: ui.Color.fromARGB(255, 255, 255, 255),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 17,
+                            ),
+                          ),
+                          SizedBox(width: 12),
+                          SvgPicture.asset(
+                            width: 32,
+                            height: 32,
+                            "assets/icons/doubleArrow.svg",
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                      icon: SvgPicture.asset(
+                        width: 32,
+                        height: 32,
+                        "assets/icons/sendIcon.svg",
+                      ),
                     ),
                   ),
                 ],
