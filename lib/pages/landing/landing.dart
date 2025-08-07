@@ -12,6 +12,9 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Stack(
       // layout widget
       alignment: AlignmentDirectional.bottomEnd,
@@ -25,25 +28,71 @@ class _LandingPageState extends State<LandingPage> {
         ),
 
         //bottom blurred out section
-        ClipRRect(
+        ClipRect(
+          /// adds a rounded corner, clipRect => rectangle
           // utility widget
           child: BackdropFilter(
             // glasslike feature
-            filter: ui.ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
+            filter: ui.ImageFilter.blur(sigmaX: 25.0, sigmaY: 25.0),
             child: SizedBox(
               height: 300,
               width: double.infinity,
               child: Column(
                 children: [
+                  SizedBox(height: 12),
                   // rich text
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
-                      text: 'Unveil The Travel Wonders',
+                      text: 'Unveil The \nTravel Wonders',
                       style: TextStyle(
                         color: const ui.Color.fromARGB(255, 255, 255, 255),
                         fontSize: 40,
+                        letterSpacing: 0.1,
                       ),
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  SizedBox(
+                    width: screenWidth * 2 / 3,
+                    child: Column(
+                      children: [
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: 'NORWAY',
+                            style: TextStyle(
+                              color: const ui.Color.fromARGB(
+                                255,
+                                255,
+                                255,
+                                255,
+                              ),
+                              fontSize: 24,
+                              letterSpacing: 16,
+                              fontWeight: FontWeight.w200,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 12),
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text:
+                                'Take the first step to an unforgetable journey',
+                            style: TextStyle(
+                              color: const ui.Color.fromARGB(
+                                255,
+                                255,
+                                255,
+                                255,
+                              ),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
