@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.black,
                     ),
                   ),
-                ),
+                ), 
               ],
             ),
           ),
@@ -66,10 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: screenWidth * 2 / 3,
                   child: SearchAnchor(
                     builder: (
-                      BuildContext context,
-                      SearchController controller,
+                      BuildContext context, // where am i ?
+                      SearchController controller, // how do i manipulate this?
                     ) {
                       return SearchBar(
+                        backgroundColor:  WidgetStatePropertyAll<Color>(
+                          Colors.amber
+                        ),
                         controller: controller,
                         padding: const WidgetStatePropertyAll<EdgeInsets>(
                           EdgeInsets.symmetric(horizontal: 16.0),
@@ -81,23 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           controller.openView();
                         },
                         leading: const Icon(Icons.search),
-                        trailing: <Widget>[
-                          Tooltip(
-                            message: 'Change brightness mode',
-                            child: IconButton(
-                              // isSelected: isDark,
-                              onPressed: () {
-                                setState(() {
-                                  // isDark = !isDark;
-                                });
-                              },
-                              icon: const Icon(Icons.wb_sunny_outlined),
-                              selectedIcon: const Icon(
-                                Icons.brightness_2_outlined,
-                              ),
-                            ),
-                          ),
-                        ],
+                         
                       );
                     },
                     suggestionsBuilder: (
