@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travel/pages/landing/landing.dart';
-import 'package:travel/pages/testing.dart';
+import 'package:travel/pages/home/home.dart'; 
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const LandingPage(),
+      home: const MyHomePage(),
     );
   }
 }

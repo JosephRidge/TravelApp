@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -19,30 +18,127 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      appBar: AppBar( 
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary, 
-        title: Text(widget.title),
-      ),
-      body: Center( 
-        child: Column( 
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+      body: Column(
+        children: [
+          SizedBox(height: 28),
+          Padding(
+            padding: EdgeInsetsGeometry.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // layout widget
+              children: [
+                // takes up children since it takes up multiple items
+                RichText(
+                  text: TextSpan(
+                    text: 'Find your\nfavorite place ',
+                    style: TextStyle(fontSize: 32, color: Colors.black),
+                  ),
+                ),
+
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromARGB(255, 228, 228, 228),
+                  ),
+                  child: IconButton(
+                    padding: EdgeInsets.all(24),
+                    onPressed: () {},
+                    icon: SvgPicture.asset(
+                      "assets/icons/notification_bell.svg",
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Image(image: AssetImage("assets/images/islands.jpg"))
-          ],
-        ),
+          ),
+          // second part of the column: search section
+          Padding(
+            padding: EdgeInsetsGeometry.only(left: 16, right: 16),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: screenWidth * 2 / 3,
+                  child: SearchAnchor(
+                    builder: (
+                      BuildContext context,
+                      SearchController controller,
+                    ) {
+                      return SearchBar(
+                        controller: controller,
+                        padding: const WidgetStatePropertyAll<EdgeInsets>(
+                          EdgeInsets.symmetric(horizontal: 16.0),
+                        ),
+                        onTap: () {
+                          controller.openView();
+                        },
+                        onChanged: (_) {
+                          controller.openView();
+                        },
+                        leading: const Icon(Icons.search),
+                        trailing: <Widget>[
+                          Tooltip(
+                            message: 'Change brightness mode',
+                            child: IconButton(
+                              // isSelected: isDark,
+                              onPressed: () {
+                                setState(() {
+                                  // isDark = !isDark;
+                                });
+                              },
+                              icon: const Icon(Icons.wb_sunny_outlined),
+                              selectedIcon: const Icon(
+                                Icons.brightness_2_outlined,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                    suggestionsBuilder: (
+                      BuildContext context,
+                      SearchController controller,
+                    ) {
+                      return List<ListTile>.generate(5, (int index) {
+                        final String item = 'item $index';
+                        return ListTile(
+                          title: Text(item),
+                          onTap: () {
+                            setState(() {
+                              controller.closeView(item);
+                            });
+                          },
+                        );
+                      });
+                    },
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromARGB(255, 228, 228, 228),
+                  ),
+                  child: IconButton(
+                    padding: EdgeInsets.all(24),
+                    onPressed: () {},
+                    icon: SvgPicture.asset(
+                      "assets/icons/filter_icon.svg",
+                      width: 28,
+                      height: 28,
+                      color: Color(0xff7f7e7e),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

@@ -1,9 +1,7 @@
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:slider_button/slider_button.dart';
-
+import 'package:action_slider/action_slider.dart';
+import 'package:flutter/material.dart'; 
 class TestWidget extends StatefulWidget {
   const TestWidget({super.key});
 
@@ -68,43 +66,13 @@ class _TestWidgetState extends State<TestWidget> {
                   ),
                   SizedBox(height: 12),
                   Center(
-                    child: SliderButton(
-                      backgroundColor: const Color(0xff4c593b),
-                      buttonColor: const Color(0xff9bfe67),
-                      height: 60,
-                      action: () async {
-                        ///Do something here OnSlide
-                        return true;
+                    child: ActionSlider.standard(
+                      child: const Text('Slide to confirm'),
+                      action: (controller) async {
+                        controller.loading(); //starts loading animation
+                        await Future.delayed(const Duration(seconds: 3));
+                        controller.success(); //starts success animation
                       },
-                      label: Padding(
-                        padding: EdgeInsets.only(left: 80, right: 20),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Explore Now",
-                              style: TextStyle(
-                                color: ui.Color.fromARGB(255, 255, 255, 255),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 17,
-                              ),
-                            ),
-                            SizedBox(width: 20),
-                            SvgPicture.asset(
-                              "assets/icons/doubleArrow.svg",
-                              semanticsLabel: 'Dart Logo',
-                              height: 30,
-                              width: 30,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                      ),
-                      icon: SvgPicture.asset(
-                        "assets/icons/sendIcon.svg",
-                        semanticsLabel: 'Dart Logo',
-                        height: 30,
-                        width: 30,
-                      ),
                     ),
                   ),
                 ],
